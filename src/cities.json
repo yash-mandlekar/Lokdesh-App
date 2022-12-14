@@ -1,0 +1,412 @@
+[
+    {
+        "id": 0,
+        "city": "Bhopal",
+        "selected": true
+    },
+    {
+        "id": 1,
+        "city": "Indore",
+        "selected": true
+    },
+    {
+        "id": 2,
+        "city": "Jabalpur",
+        "selected": false
+    },
+    {
+        "id": 3,
+        "city": "Gwalior",
+        "selected": false
+    },
+    {
+        "id": 4,
+        "city": "Ujjain",
+        "selected": false
+    },
+    {
+        "id": 5,
+        "city": "Sagar",
+        "selected": false
+    },
+    {
+        "id": 6,
+        "city": "Ratlam",
+        "selected": false
+    },
+    {
+        "id": 7,
+        "city": "Satna",
+        "selected": false
+    },
+    {
+        "id": 8,
+        "city": "Murwara",
+        "selected": false
+    },
+    {
+        "id": 9,
+        "city": "Morena",
+        "selected": false
+    },
+    {
+        "id": 10,
+        "city": "Singrauli",
+        "selected": false
+    },
+    {
+        "id": 11,
+        "city": "Rewa",
+        "selected": false
+    },
+    {
+        "id": 12,
+        "city": "Vidisha",
+        "selected": false
+    },
+    {
+        "id": 13,
+        "city": "Ganjbasoda",
+        "selected": false
+    },
+    {
+        "id": 14,
+        "city": "Shivpuri",
+        "selected": false
+    },
+    {
+        "id": 15,
+        "city": "Mandsaur",
+        "selected": false
+    },
+    {
+        "id": 16,
+        "city": "Neemuch",
+        "selected": false
+    },
+    {
+        "id": 17,
+        "city": "Nagda",
+        "selected": false
+    },
+    {
+        "id": 18,
+        "city": "Itarsi",
+        "selected": false
+    },
+    {
+        "id": 19,
+        "city": "Sarni",
+        "selected": false
+    },
+    {
+        "id": 20,
+        "city": "Sehore",
+        "selected": false
+    },
+    {
+        "id": 21,
+        "city": "Mhow Cantonment",
+        "selected": false
+    },
+    {
+        "id": 22,
+        "city": "Seoni",
+        "selected": false
+    },
+    {
+        "id": 23,
+        "city": "Balaghat",
+        "selected": false
+    },
+    {
+        "id": 24,
+        "city": "Ashok Nagar",
+        "selected": false
+    },
+    {
+        "id": 25,
+        "city": "Tikamgarh",
+        "selected": false
+    },
+    {
+        "id": 26,
+        "city": "Shahdol",
+        "selected": false
+    },
+    {
+        "id": 27,
+        "city": "Pithampur",
+        "selected": false
+    },
+    {
+        "id": 28,
+        "city": "Alirajpur",
+        "selected": false
+    },
+    {
+        "id": 29,
+        "city": "Mandla",
+        "selected": false
+    },
+    {
+        "id": 30,
+        "city": "Sheopur",
+        "selected": false
+    },
+    {
+        "id": 31,
+        "city": "Shajapur",
+        "selected": false
+    },
+    {
+        "id": 32,
+        "city": "Panna",
+        "selected": false
+    },
+    {
+        "id": 33,
+        "city": "Raghogarh-Vijaypur",
+        "selected": false
+    },
+    {
+        "id": 34,
+        "city": "Sendhwa",
+        "selected": false
+    },
+    {
+        "id": 35,
+        "city": "Sidhi",
+        "selected": false
+    },
+    {
+        "id": 36,
+        "city": "Pipariya",
+        "selected": false
+    },
+    {
+        "id": 37,
+        "city": "Shujalpur",
+        "selected": false
+    },
+    {
+        "id": 38,
+        "city": "Sironj",
+        "selected": false
+    },
+    {
+        "id": 39,
+        "city": "Pandhurna",
+        "selected": false
+    },
+    {
+        "id": 40,
+        "city": "Nowgong",
+        "selected": false
+    },
+    {
+        "id": 41,
+        "city": "Mandideep",
+        "selected": false
+    },
+    {
+        "id": 42,
+        "city": "Sihora",
+        "selected": false
+    },
+    {
+        "id": 43,
+        "city": "Raisen",
+        "selected": false
+    },
+    {
+        "id": 44,
+        "city": "Lahar",
+        "selected": false
+    },
+    {
+        "id": 45,
+        "city": "Maihar",
+        "selected": false
+    },
+    {
+        "id": 46,
+        "city": "Sanawad",
+        "selected": false
+    },
+    {
+        "id": 47,
+        "city": "Sabalgarh",
+        "selected": false
+    },
+    {
+        "id": 48,
+        "city": "Umaria",
+        "selected": false
+    },
+    {
+        "id": 49,
+        "city": "Porsa",
+        "selected": false
+    },
+    {
+        "id": 50,
+        "city": "Narsinghgarh",
+        "selected": false
+    },
+    {
+        "id": 51,
+        "city": "Malaj Khand",
+        "selected": false
+    },
+    {
+        "id": 52,
+        "city": "Sarangpur",
+        "selected": false
+    },
+    {
+        "id": 53,
+        "city": "Mundi",
+        "selected": false
+    },
+    {
+        "id": 54,
+        "city": "Nepanagar",
+        "selected": false
+    },
+    {
+        "id": 55,
+        "city": "Pasan",
+        "selected": false
+    },
+    {
+        "id": 56,
+        "city": "Mahidpur",
+        "selected": false
+    },
+    {
+        "id": 57,
+        "city": "Seoni-Malwa",
+        "selected": false
+    },
+    {
+        "id": 58,
+        "city": "Rehli",
+        "selected": false
+    },
+    {
+        "id": 59,
+        "city": "Manawar",
+        "selected": false
+    },
+    {
+        "id": 60,
+        "city": "Rahatgarh",
+        "selected": false
+    },
+    {
+        "id": 61,
+        "city": "Panagar",
+        "selected": false
+    },
+    {
+        "id": 62,
+        "city": "Wara Seoni",
+        "selected": false
+    },
+    {
+        "id": 63,
+        "city": "Tarana",
+        "selected": false
+    },
+    {
+        "id": 64,
+        "city": "Sausar",
+        "selected": false
+    },
+    {
+        "id": 65,
+        "city": "Rajgarh",
+        "selected": false
+    },
+    {
+        "id": 66,
+        "city": "Niwari",
+        "selected": false
+    },
+    {
+        "id": 67,
+        "city": "Mauganj",
+        "selected": false
+    },
+    {
+        "id": 68,
+        "city": "Manasa",
+        "selected": false
+    },
+    {
+        "id": 69,
+        "city": "Nainpur",
+        "selected": false
+    },
+    {
+        "id": 70,
+        "city": "Prithvipur",
+        "selected": false
+    },
+    {
+        "id": 71,
+        "city": "Sohagpur",
+        "selected": false
+    },
+    {
+        "id": 72,
+        "city": "Nowrozabad (Khodargama)",
+        "selected": false
+    },
+    {
+        "id": 73,
+        "city": "Shamgarh",
+        "selected": false
+    },
+    {
+        "id": 74,
+        "city": "Maharajpur",
+        "selected": false
+    },
+    {
+        "id": 75,
+        "city": "Multai",
+        "selected": false
+    },
+    {
+        "id": 76,
+        "city": "Pali",
+        "selected": false
+    },
+    {
+        "id": 77,
+        "city": "Pachore",
+        "selected": false
+    },
+    {
+        "id": 78,
+        "city": "Rau",
+        "selected": false
+    },
+    {
+        "id": 79,
+        "city": "Mhowgaon",
+        "selected": false
+    },
+    {
+        "id": 80,
+        "city": "Vijaypur",
+        "selected": false
+    },
+    {
+        "id": 81,
+        "city": "Narsinghgarh",
+        "selected": false
+    }
+]

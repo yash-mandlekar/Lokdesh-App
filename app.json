@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "Lokdesh",
+    "slug": "Lokdesh",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/lokdesh.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/lokdesh.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#AA7777"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo.png"
+      },
+      "package": "com.lokdesh.Lokdesh"
+    },
+    "web": {
+      "favicon": "./assets/logo.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "effa84cd-7c74-44b5-ac06-c4e8fa29bcba"
+      }
+    }
+  }
+}
