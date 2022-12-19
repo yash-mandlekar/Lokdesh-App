@@ -5,7 +5,7 @@ import { View, StyleSheet, ActivityIndicator, Dimensions } from "react-native";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
 import Axios from "../components/Axios";
 
-const Videos = ({ refToken }) => {
+const Videos = ({ refToken, accessToken }) => {
   // const videoData = [
   //   {
   //     video:
@@ -40,6 +40,7 @@ const Videos = ({ refToken }) => {
   //     comments: "1.2k",
   //   },
   // ];
+
   const [videoData, setVideoData] = useState([]);
   const [load, setLoad] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -70,7 +71,7 @@ const Videos = ({ refToken }) => {
       ) : (
         <View
           style={{
-            height: Dimensions.get("window").height - 27,
+            height: Dimensions.get("window").height - 30,
           }}
         >
           <SwiperFlatList
@@ -83,6 +84,8 @@ const Videos = ({ refToken }) => {
                 index={index}
                 currentIndex={currentIndex}
                 refToken={refToken}
+                accessToken={accessToken}
+                getShorts={getShorts}
               />
             )}
             keyExtractor={(item, index) => index}

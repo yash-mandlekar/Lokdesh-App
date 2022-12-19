@@ -11,7 +11,7 @@ import Ionic from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
 const HomeNewsPhoto = ({ item, setSingleNews, index }) => {
-  const { metaTitle, metaDescription, file, location } = item;
+  const { metaTitle, metaDescription, file, location, share } = item;
   const navigation = useNavigation();
   const shareBtn = () => {
     Share.share({
@@ -33,14 +33,15 @@ const HomeNewsPhoto = ({ item, setSingleNews, index }) => {
       <View style={styles.contentContainer}>
         <View style={styles.titles}>
           <Text style={styles.title}>
-            {metaTitle.length > 50
-              ? metaTitle.substring(0, 50) + "..."
+            {metaTitle?.length > 50
+              ? metaTitle?.substring(0, 50).replace(/\s+/g, " ").trim() + "..."
               : metaTitle}
           </Text>
-          <Text style={[styles.title, { color: "gray" }]}>
-            {metaDescription.length > 50
-              ? metaDescription.substring(0, 90).trim() + "..."
-              : metaDescription}
+          <Text style={[styles.title, { color: "gray", fontSize: 13 }]}>
+            {metaDescription?.length > 50
+              ? metaDescription?.substring(0, 90).replace(/\s+/g, " ").trim() +
+                "..."
+              : metaDescription?.replace(/\s+/g, " ").trim()}
           </Text>
         </View>
         <Image
@@ -51,8 +52,8 @@ const HomeNewsPhoto = ({ item, setSingleNews, index }) => {
       <View style={styles.bottomContainer}>
         <View style={styles.type}>
           <Text style={styles.typeText}>
-            {location.charAt(0).toUpperCase()}
-            {location.slice(1, 19)}
+            {location?.charAt(0).toUpperCase()}
+            {location?.slice(1, 19)}
           </Text>
         </View>
         {/* <TouchableOpacity style={styles.like}>
@@ -61,7 +62,7 @@ const HomeNewsPhoto = ({ item, setSingleNews, index }) => {
         </TouchableOpacity> */}
         <TouchableOpacity style={styles.button} onPress={shareBtn}>
           <Ionic name="share-social-outline" size={16} />
-          <Text style={styles.Share}>Share</Text>
+          <Text style={styles.Share}>{share}</Text>
         </TouchableOpacity>
       </View>
     </TouchableOpacity>
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   typeText: {
-    fontSize: 14,
+    fontSize: 12,
     color: "black",
     fontWeight: "bold",
   },

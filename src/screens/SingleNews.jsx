@@ -6,15 +6,26 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Ionic from "react-native-vector-icons/Ionicons";
 import TopNavBar from "../components/TopNavBar";
 import BottomNavBar from "../components/BottomNavBar";
 import { useNavigation } from "@react-navigation/native";
 import { WebView } from "react-native-webview";
-
+import * as Speech from "expo-speech";
 const SingleNews = ({ singleNews }) => {
   const navigation = useNavigation();
+  const [speech, setSpeech] = useState(false);
+
+  const speak = async (e) => {
+    setSpeech(true);
+    // normal rate is 0.8
+    Speech.speak(e, { rate: 0.8 });
+  };
+  const stopSpeak = async (e) => {
+    setSpeech(false);
+    Speech.stop();
+  };
   return (
     <>
       <TopNavBar />
@@ -51,9 +62,24 @@ const SingleNews = ({ singleNews }) => {
           <Text style={styles.singleNewsContent}>
             {singleNews.shortDescription}
           </Text>
-          <Text style={styles.singleNewsContent}>
-            {singleNews.shortDescription}
-          </Text>
+          {speech ? (
+            <TouchableOpacity style={styles.SpeakBtn} onPress={stopSpeak}>
+              <Ionic name="volume-high-outline" size={30} color="blue" />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={styles.SpeakBtn}
+              onPress={() =>
+                speak(
+                  singleNews.metaTitle +
+                    singleNews.metaDescription +
+                    singleNews.shortDescription
+                )
+              }
+            >
+              <Ionic name="volume-high-outline" size={30} color="black" />
+            </TouchableOpacity>
+          )}
         </View>
       </ScrollView>
       <BottomNavBar />
@@ -70,6 +96,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginBottom: 70,
   },
+  // singleNewsContainer: {
+  //   backgroundColor: "white",
+  //   borderRadius: 5,
+  //   marginHorizontal: 5,
+  //   marginBottom: 70,
+  // },
   singleNewsBack: {
     width: "100%",
     flexDirection: "row",
@@ -98,5 +130,12 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.1)",
     borderRadius: 5,
     zoom: 0.5,
+  },
+  SpeakBtn: {
+    backgroundColor: "rgba(0,0,0,0.1)",
+    borderRadius: 50,
+    padding: 10,
+    alignSelf: "flex-end",
+    marginHorizontal: 10,
   },
 });

@@ -18,10 +18,9 @@ import SwiperFlatList from "react-native-swiper-flatlist";
 import HomeAds from "../components/HomeAds";
 import Ionic from "react-native-vector-icons/Ionicons";
 import Axios from "../components/Axios";
+import AsyncStore from "@react-native-async-storage/async-storage";
 
 const Home = ({ refToken, setSingleNews }) => {
-  var groundcolor = "black";
-
   const [load, setLoad] = useState(true);
   const [AdsData, setAdsData] = useState([
     {
@@ -62,13 +61,47 @@ const Home = ({ refToken, setSingleNews }) => {
     setAdsData([NewsData[i]]);
   };
   const getCategories = async () => {
+    const lang2 = await AsyncStore.getItem("language");
     const res = await Axios.get("/news-category");
-    setCategories(res.data);
+    const cpy = [];
+    res.data.map((category) => {
+      Axios.post("/user/translate", {
+        text: category.hindiName,
+        target: JSON.parse(lang2).code,
+      }).then((res2) => {
+        cpy.push({
+          ...category,
+          hindiName: res2.data.translation,
+        });
+        setCategories(cpy);
+      });
+    });
   };
   const getNews = async () => {
+    const lang2 = await AsyncStore.getItem("language");
     setLoad(true);
     const res = await Axios.get("/all/news");
-    setNewsData(res.data);
+    // Translate
+    const cpy = [];
+    for (var i = 0; i < res.data.length; i++) {
+      const res2 = await Axios.post("/user/translate", {
+        text: res.data[i].metaTitle,
+        text2: res.data[i].metaDescription,
+        text3: res.data[i].shortDescription,
+        text4: res.data[i].location,
+        text5: "शेयर",
+        target: JSON.parse(lang2).code,
+      });
+      cpy.push({
+        ...res.data[i],
+        metaTitle: res2.data.translation,
+        metaDescription: res2.data.translation2,
+        shortDescription: res2.data.translation3,
+        location: res2.data.translation4,
+        share: res2.data.translation5,
+      });
+    }
+    setNewsData(cpy);
     setLoad(false);
   };
   const filterNews = async (category) => {
@@ -77,7 +110,6 @@ const Home = ({ refToken, setSingleNews }) => {
     setNewsData(res.data);
     setLoad(false);
   };
-
   useEffect(() => {
     getNews();
     getCategories();
@@ -90,19 +122,21 @@ const Home = ({ refToken, setSingleNews }) => {
           horizontal={true}
           contentContainerStyle={styles.newsFilters}
         >
-          {categories.map((category, i) => (
-            <TouchableOpacity
-              onPress={() => filterNews(category.categoryUrl)}
-              key={i}
-              style={styles.newsFilter}
-            >
-              <Image
-                source={{ uri: `data:image/png;base64,${category.icon}` }}
-                style={styles.icon}
-              />
-              <Text style={styles.newsFilterText}>{category.hindiName}</Text>
-            </TouchableOpacity>
-          ))}
+          {categories
+            .sort((a, b) => a.sortOrder - b.sortOrder)
+            .map((category, i) => (
+              <TouchableOpacity
+                onPress={() => filterNews(category.categoryUrl)}
+                key={i}
+                style={styles.newsFilter}
+              >
+                <Image
+                  source={{ uri: `data:image/png;base64,${category.icon}` }}
+                  style={styles.icon}
+                />
+                <Text style={styles.newsFilterText}>{category.hindiName}</Text>
+              </TouchableOpacity>
+            ))}
         </ScrollView>
       </SafeAreaView>
       {showAds && (

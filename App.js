@@ -14,6 +14,8 @@ import { useEffect, useState } from "react";
 import AsyncStore from "@react-native-async-storage/async-storage";
 import Profile from "./src/screens/Profile";
 import SingleNews from "./src/screens/SingleNews";
+import SingleEPaper from "./src/screens/SingleEpaper";
+import Language from "./src/screens/Language";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -112,7 +114,16 @@ export default function App() {
                   headerShown: false,
                 }}
               >
-                {(props) => <Epaper />}
+                {(props) => <Epaper setSingleNews={setSingleNews} />}
+              </Stack.Screen>
+              {/* Single Epaper Screen */}
+              <Stack.Screen
+                name="SingleEpaper"
+                options={{
+                  headerShown: false,
+                }}
+              >
+                {(props) => <SingleEPaper singleNews={singleNews} />}
               </Stack.Screen>
               {/* Videos Screen */}
               <Stack.Screen
@@ -121,7 +132,9 @@ export default function App() {
                   headerShown: false,
                 }}
               >
-                {(props) => <Videos refToken={refToken} />}
+                {(props) => (
+                  <Videos refToken={refToken} accessToken={accessToken} />
+                )}
               </Stack.Screen>
               {/* Profile Screen */}
               <Stack.Screen
@@ -131,6 +144,15 @@ export default function App() {
                 }}
               >
                 {(props) => <Profile refToken={refToken} />}
+              </Stack.Screen>
+              {/* Language Screen */}
+              <Stack.Screen
+                name="Language"
+                options={{
+                  headerShown: false,
+                }}
+              >
+                {(props) => <Language />}
               </Stack.Screen>
             </>
           )}

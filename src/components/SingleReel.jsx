@@ -11,7 +11,14 @@ import {
 import { Video } from "expo-av";
 import Ionic from "react-native-vector-icons/Ionicons";
 import Axios from "./Axios";
-const SingleReel = ({ item, index, currentIndex, refToken }) => {
+const SingleReel = ({
+  item,
+  index,
+  currentIndex,
+  refToken,
+  accessToken,
+  getShorts,
+}) => {
   const videoRef = useRef(null);
   const PlaybuttonRef = useRef(null);
   const [status, setStatus] = useState({});
@@ -104,11 +111,14 @@ const SingleReel = ({ item, index, currentIndex, refToken }) => {
   };
   const handleLike = async () => {
     try {
-      const res = await Axios.post(
-        "/like",
-        { id: item._id },
-        { headers: { token: refToken } }
-      );
+      const config = {
+        headers: {
+          token: accessToken,
+        },
+      };
+      const res = await Axios.post(`/user/shorts/like/${item._id}`, {}, config);
+      // item.likes = res.data.likes;
+      getShorts();
       setLike(!like);
     } catch (err) {
       console.log(err);
@@ -179,10 +189,14 @@ const SingleReel = ({ item, index, currentIndex, refToken }) => {
       >
         {/* Like ,Comment and Share Button */}
         {/* Like */}
-        <TouchableOpacity onPress={() => setLike(!like)} style={styles.btn}>
+        <TouchableOpacity onPress={handleLike} style={styles.btn}>
           <Ionic
             name="heart"
-            style={[styles.btnIcon, { color: like ? "red" : "white" }]}
+            // style={[styles.btnIcon, { color: like ? "red" : "white" }]}
+            style={[
+              styles.btnIcon,
+              { color: item.likes.includes(User._id) ? "red" : "white" },
+            ]}
           />
           <Text style={styles.btnText}>{item.likes.length}</Text>
         </TouchableOpacity>
@@ -262,11 +276,10 @@ const SingleReel = ({ item, index, currentIndex, refToken }) => {
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 export default SingleReel;
-
 const styles = StyleSheet.create({
   container: {
     width: windowWidth,
-    height: windowHeight - 27,
+    height: windowHeight - 30,
     position: "relative",
     justifyContent: "center",
     alignItems: "center",

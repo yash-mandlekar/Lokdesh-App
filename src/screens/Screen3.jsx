@@ -13,6 +13,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import citiesjson from "../cities.json";
 import Axios from "../components/Axios";
+import AsyncStore from "@react-native-async-storage/async-storage";
+
 const Screen3 = ({ refToken }) => {
   const navigation = useNavigation();
   const [slide, setslide] = useState(1);
@@ -20,16 +22,16 @@ const Screen3 = ({ refToken }) => {
   const [inp, setInp] = useState("");
   const [selected, setSelected] = useState(0);
   const [Languages, setLanguages] = useState([
-    { lang1: "हिन्दी", lang2: "HINDI" },
-    { lang1: "ENGLISH" },
-    { lang1: "मराठी", lang2: "MARATHI" },
-    { lang1: "தமிழ்", lang2: "TAMIL" },
-    { lang1: "ગુજરાતી", lang2: "GUJRATI" },
-    { lang1: "తెలుగు", lang2: "TELUGU" },
-    { lang1: "भोजपुरी", lang2: "BHOJPURI" },
-    { lang1: "ଓଡିଆ", lang2: "ODIA" },
-    { lang1: "اردو", lang2: "URDU" },
-    { lang1: "ਪੰਜਾਬੀ", lang2: "PUNJABI" },
+    { lang1: "हिन्दी", lang2: "HINDI", code: "hi" },
+    { lang1: "ENGLISH", code: "en" },
+    { lang1: "मराठी", lang2: "MARATHI", code: "mr" },
+    { lang1: "தமிழ்", lang2: "TAMIL", code: "ta" },
+    { lang1: "ગુજરાતી", lang2: "GUJRATI", code: "gu" },
+    { lang1: "తెలుగు", lang2: "TELUGU", code: "te" },
+    { lang1: "भोजपुरी", lang2: "BHOJPURI", code: "bh" },
+    { lang1: "ଓଡିଆ", lang2: "ODIA", code: "or" },
+    { lang1: "اردو", lang2: "URDU", code: "ur" },
+    { lang1: "ਪੰਜਾਬੀ", lang2: "PUNJABI", code: "pa" },
   ]);
   const [options, setOptions] = useState([]);
   const [cities, setCities] = useState([]);
@@ -73,6 +75,10 @@ const Screen3 = ({ refToken }) => {
     setOptions(res.data);
     setLoad(false);
   };
+  const handleLanguage = async (lang, i) => {
+    await AsyncStore.setItem("language", JSON.stringify(lang));
+    setSelected(i);
+  };
   useEffect(() => {
     getOptions();
   }, []);
@@ -100,7 +106,7 @@ const Screen3 = ({ refToken }) => {
             {Languages.map((language, index) => (
               <TouchableOpacity
                 key={index}
-                onPress={() => setSelected(index)}
+                onPress={() => handleLanguage(language, index)}
                 style={[
                   styles.box,
                   index === selected && {

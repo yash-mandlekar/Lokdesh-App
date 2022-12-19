@@ -60,20 +60,32 @@ const TopNavBar = () => {
             optionText: styles.optionTextStyle,
           }}
         >
-          <MenuOption style={styles.menuopt} value="Profile">
-            <Ionic name="person" size={25} color="black" />
-            <Text style={styles.dropDownText}>Profile</Text>
-          </MenuOption>
-          <MenuOption style={styles.menuopt} value="Epaper">
-            <Ionic name="newspaper" size={25} color="black" />
-            <Text style={styles.dropDownText}>Epaper</Text>
-          </MenuOption>
-          <MenuOption style={styles.menuopt} value="Videos">
-            <Ionic name="videocam" size={25} color="black" />
-            <Text style={styles.dropDownText}>Videos</Text>
-          </MenuOption>
-          <MenuOption style={styles.menuopt} value="Logout">
-            <Ionic name="log-out" size={25} color="black" />
+          <View style={styles.menuopts}>
+            <MenuOption style={styles.menuopt} value="Profile">
+              <Ionic name="person" size={40} color="black" />
+              <Text style={styles.dropDownText}>Profile</Text>
+            </MenuOption>
+            <MenuOption style={styles.menuopt} value="Epaper">
+              <Ionic name="newspaper" size={40} color="black" />
+              <Text style={styles.dropDownText}>Epaper</Text>
+            </MenuOption>
+          </View>
+          <View style={styles.menuopts}>
+            <MenuOption style={styles.menuopt} value="Videos">
+              <Ionic name="videocam" size={40} color="black" />
+              <Text style={styles.dropDownText}>Videos</Text>
+            </MenuOption>
+            <MenuOption style={styles.menuopt} value="Language">
+              <Ionic name="language" size={40} color="black" />
+              <Text style={styles.dropDownText}>Select Language</Text>
+            </MenuOption>
+          </View>
+
+          <MenuOption
+            style={[styles.menuopt, { width: "100%", flexDirection: "row" }]}
+            value="Logout"
+          >
+            <Ionic name="log-out" size={30} color="black" />
             <Text style={styles.dropDownText}>Logout</Text>
           </MenuOption>
         </MenuOptions>
@@ -107,17 +119,31 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 5,
   },
-  menuopt: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
   menuOptionsStyle: {
     backgroundColor: "#dadada",
     // marginLeft: -20,
     width: "100%",
-    height: "50%",
+    height: "45%",
     borderRadius: 15,
-    padding: 10,
+    padding: 15,
+  },
+  menuopts: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    // alignItems: "center",
+    width: "100%",
+    height: "40%",
+    marginVertical: 4,
+  },
+  menuopt: {
+    width: "49%",
+    backgroundColor: "white",
+    // flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "black",
   },
   optionTextStyle: {
     fontSize: 20,

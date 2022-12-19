@@ -123,6 +123,7 @@ const Profile = ({ refToken }) => {
                 <View style={{ marginRight: 20, flex: 2 }}>
                   <Image
                     source={{
+                      // uri: "http://192.168.1.199:4000/" + User.profileImage,
                       uri: "http://192.168.29.153:4000/" + User.profileImage,
                     }}
                     style={{
