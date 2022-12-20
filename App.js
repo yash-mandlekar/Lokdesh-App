@@ -16,6 +16,7 @@ import Profile from "./src/screens/Profile";
 import SingleNews from "./src/screens/SingleNews";
 import SingleEPaper from "./src/screens/SingleEpaper";
 import Language from "./src/screens/Language";
+import Axios from "./src/components/Axios";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
