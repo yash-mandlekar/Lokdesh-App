@@ -79,7 +79,6 @@ const BottomNavBar = () => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    position: "absolute",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -88,7 +87,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderTopWidth: 1,
     borderTopColor: "#e5e5e5",
-    marginTop: 10,
     zIndex: 99,
     paddingHorizontal: 10,
     bottom: 0,
@@ -100,7 +98,7 @@ const styles = StyleSheet.create({
   },
   activebtn: {
     borderColor: "white",
-  }, 
+  },
   activetext: {
     color: "red",
   },

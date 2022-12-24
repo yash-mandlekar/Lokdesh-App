@@ -16,12 +16,11 @@ const Epaper = () => {
   }, []);
   setTimeout(() => {
     setload(false);
-  }, 4000);
+  }, 40000);
   const [load, setload] = useState(true);
 
   return (
     <View style={styles.container}>
-      <TopNavBar />
       {/* <Text>Epaper</Text> */}
       {/* Main Head For News */}
       {/* <View style={styles.mainHead}>
@@ -29,6 +28,7 @@ const Epaper = () => {
       </View> */}
       {/* Main Body  For News */}
       <View style={styles.mainBody}>
+        <TopNavBar />
         {load ? (
           <Image
             style={styles.loader}
@@ -42,8 +42,8 @@ const Epaper = () => {
             source={{ uri: "https://livestreammm.herokuapp.com/" }}
           />
         )}
+        <BottomNavBar />
       </View>
-      <BottomNavBar />
     </View>
   );
 };
@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     backgroundColor: "#fff",
-    // alignItems: 'center',
     justifyContent: "flex-start",
   },
   mainHead: {
@@ -66,9 +65,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   mainBody: {
-    height: "90%",
+    height: "100%",
     backgroundColor: "#fff",
-    // padding: 10,
     textAlign: "justify",
   },
   mainBodyText: {
@@ -77,11 +75,9 @@ const styles = StyleSheet.create({
   },
   web: {
     flex: 0.912,
-    // height: "80%",
   },
   loader: {
-    flex: 0.912,
-    // height: "80%",
+    flex: 1,
   },
 });
 

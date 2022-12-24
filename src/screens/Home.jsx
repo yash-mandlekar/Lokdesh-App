@@ -1,5 +1,4 @@
 import {
-  Dimensions,
   Image,
   StyleSheet,
   Text,
@@ -61,7 +60,14 @@ const Home = ({ refToken, setSingleNews }) => {
     setAdsData([NewsData[i]]);
   };
   const getCategories = async () => {
-    const lang2 = await AsyncStore.getItem("language");
+    var lang2 = await AsyncStore.getItem("language");
+    if (!lang2) {
+      await AsyncStore.setItem(
+        "language",
+        JSON.stringify({ code: "en", name: "English" })
+      );
+      lang2 = JSON.stringify({ code: "en", name: "English" });
+    }
     const res = await Axios.get("/news-category");
     const cpy = [];
     res.data.map((category) => {
@@ -78,7 +84,10 @@ const Home = ({ refToken, setSingleNews }) => {
     });
   };
   const getNews = async () => {
-    const lang2 = await AsyncStore.getItem("language");
+    var lang2 = await AsyncStore.getItem("language");
+    if (!lang2) {
+      lang2 = JSON.stringify({ code: "en", name: "English" });
+    }
     setLoad(true);
     const res = await Axios.get("/all/news");
     // Translate
@@ -176,7 +185,9 @@ const Home = ({ refToken, setSingleNews }) => {
         </View>
       )}
       {load ? (
-        <ActivityIndicator size="large" />
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" />
+        </View>
       ) : (
         <ScrollView contentContainerStyle={styles.posts}>
           {NewsData.length > 0 ? (
@@ -217,17 +228,21 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     backgroundColor: "#fff",
-    // alignItems: 'center',
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
   },
   headerLogo: {
     width: "81vw",
     aspectRatio: 135 / 76,
     display: "flex",
     alignItems: "stretch",
-    marginTop: 10,
-    marginBottom: 10,
     borderRadius: 10,
+  },
+  loading: {
+    width: "100%",
+    height: "50%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
   posts: {
     width: "100%",
@@ -235,8 +250,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "space-between",
     marginTop: 10,
-    zIndex: -1,
-    paddingBottom: 100,
   },
   adsContainer: {
     width: "100%",
@@ -245,18 +258,15 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     justifyContent: "center",
     alignSelf: "center",
-    zIndex: -1,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   safeview: {
-    // flex: 0.07,
-    height: "6%",
+    height: "8%",
     width: "100%",
-    zIndex: -1,
-    marginBottom: 10,
+    marginTop: 5,
   },
   newsFilters: {
-    height: 150,
+    height: "100%",
     display: "flex",
     flexDirection: "row",
   },
@@ -266,8 +276,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
   },
-  newsFilterText: {
-    fontSize: 13,
+  newsFilterText: {     
+    fontSize: 14,
     color: "black",
     fontWeight: "bold",
   },
@@ -281,11 +291,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     zIndex: 1,
-    // backgroundColor: 'rgba(0,0,0,0.2)',
   },
   icon: {
-    width: 30,
-    height: 30,
+    width: 37,
+    height: 37,
     borderRadius: 10,
   },
 });

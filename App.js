@@ -16,7 +16,6 @@ import Profile from "./src/screens/Profile";
 import SingleNews from "./src/screens/SingleNews";
 import SingleEPaper from "./src/screens/SingleEpaper";
 import Language from "./src/screens/Language";
-import Axios from "./src/components/Axios";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -25,7 +24,7 @@ export default function App() {
   const [singleNews, setSingleNews] = useState({});
 
   const [userValidation, setuserValidation] = useState({
-    phone: "9826818996",
+    phone: "",
   });
   const getToken = async () => {
     const refreshToken = await AsyncStore.getItem("refreshToken");

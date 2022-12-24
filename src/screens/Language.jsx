@@ -5,6 +5,8 @@ import BottomNavBar from "../components/BottomNavBar";
 import AsyncStore from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 
+var boxTextColor = "#FF0000";
+
 const Language = () => {
   const navigation = useNavigation();
   const [selected, setSelected] = useState(0);
@@ -45,6 +47,7 @@ const Language = () => {
     <View style={styles.container}>
       <TopNavBar />
       <View style={styles.mainContainer}>
+        <Text style={styles.langText}>भाषा का चयन करें </Text>
         <View style={styles.boxContainer}>
           {Languages.map((language, index) => (
             <TouchableOpacity
@@ -80,11 +83,7 @@ const Language = () => {
             </TouchableOpacity>
           ))}
           {/* Save Changes Button */}
-          <TouchableOpacity
-            style={styles.saveBtn}
-            // onPress={() => navigation.navigate("Home")}
-            onPress={handleNavigation}
-          >
+          <TouchableOpacity style={styles.saveBtn} onPress={handleNavigation}>
             <Text style={styles.saveBtnText}>Save Changes</Text>
           </TouchableOpacity>
         </View>
@@ -95,32 +94,19 @@ const Language = () => {
 };
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    marginTop: 3,
-    minHeight: 526,
-    borderTopColor: "#A70000",
-    borderBottomColor: "white",
-    borderRightColor: "white",
-    borderLeftColor: "white",
-    borderWidth: 1,
-    backgroundColor: "white",
-    paddingTop: 50,
-    paddingHorizontal: 20,
-  },
   container: {
     height: "100%",
     backgroundColor: "#fff",
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
   },
-  EpaperCnt: {
-    padding: 15,
-    marginBottom: 60,
-    backgroundColor: "#f2f2f2",
+  mainContainer: {
+    marginTop: 3,
+    minHeight: "65%",
+    paddingHorizontal: 20,
   },
   boxContainer: {
-    height: 510,
+    height: "70%",
     flexDirection: "row",
-    flex: 1,
     flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "space-around",
@@ -129,33 +115,40 @@ const styles = StyleSheet.create({
     width: 142,
     height: 65,
     borderWidth: 1,
-    borderColor: "#FF0000",
+    borderColor: boxTextColor,
     margin: 8,
-    color: "#FF0000",
+    color: boxTextColor,
     alignItems: "center",
     justifyContent: "center",
   },
   boxText: {
-    color: "#FF0000",
+    color: boxTextColor,
     fontWeight: "bold",
     margin: 4,
   },
   saveBtn: {
-    backgroundColor: "white",
     width: "96%",
-    height: 65,
+    height: 55,
     alignItems: "center",
     justifyContent: "center",
     margin: 8,
     borderWidth: 1,
     borderColor: "black",
     borderRadius: 5,
-    marginTop: 100,
     backgroundColor: "#dadada",
   },
   saveBtnText: {
     fontWeight: "bold",
     margin: 4,
+  },
+  langText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    margin: 4,
+    textAlign: "center",
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
+    paddingBottom: 10,
   },
 });
 

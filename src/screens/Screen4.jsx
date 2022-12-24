@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  BackHandler,
+  Alert,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -79,10 +81,29 @@ const Screen4 = ({
       console.log(err);
     }
   };
+
   useEffect(() => {
     if (refToken) {
       navigation.navigate("Home");
     }
+  }, []);
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to exit?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel",
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() },
+      ]);
+      return true;
+    };
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+    return () => backHandler.remove();
   }, []);
   return (
     <View style={styles.container}>
@@ -90,39 +111,39 @@ const Screen4 = ({
         <Text style={styles.topText}>लॉग इन करें</Text>
       </TouchableOpacity>
       <View style={styles.mainContainer}>
-        <Text style={styles.mainText}>
-          अपना 10 अंकों का मोबाइल नंबर दर्ज करें|
-        </Text>
-        <View>
-          <Image
-            resizeMode="contain"
-            style={styles.mobileLogo}
-            source={require("../../assets/images/mobile.png")}
-          />
-          <TextInput
-            style={styles.input}
-            onChangeText={(text) => onChangeNumber(text)}
-            value={phone}
-            placeholder="अपना नंबर दर्ज करें"
-            keyboardType="numeric"
-            returnKeyType="next"
-          />
-        </View>
-        {!verified && (
-          <TouchableOpacity
-            onPress={getLink}
-            style={[
-              styles.btn1,
-              verified && { backgroundColor: "#707070" },
-              phone.length < 9 && { backgroundColor: "#c2c2c2" },
-            ]}
-          >
-            <Text style={styles.btn1text}>ओटीपी प्राप्त करें</Text>
-          </TouchableOpacity>
-        )}
         {!otpSection ? (
           <View>
-            <View style={styles.logoContainer}>
+            <Text style={styles.mainText}>
+              अपना 10 अंकों का मोबाइल नंबर दर्ज करें|
+            </Text>
+            <View>
+              <Image
+                resizeMode="contain"
+                style={styles.mobileLogo}
+                source={require("../../assets/images/mobile.png")}
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={(text) => onChangeNumber(text)}
+                value={phone}
+                placeholder="अपना नंबर दर्ज करें"
+                keyboardType="numeric"
+                returnKeyType="next"
+              />
+            </View>
+            {!verified && (
+              <TouchableOpacity
+                onPress={getLink}
+                style={[
+                  styles.btn1,
+                  verified && { backgroundColor: "#707070" },
+                  phone.length < 10 && { backgroundColor: "#c2c2c2" },
+                ]}
+              >
+                <Text style={styles.btn1text}>ओटीपी प्राप्त करें</Text>
+              </TouchableOpacity>
+            )}
+            {/* <View style={styles.logoContainer}>
               <TouchableOpacity
                 onPress={() => navigation.navigate("Screen4")}
                 style={styles.logobtn}
@@ -149,7 +170,7 @@ const Screen4 = ({
                 />
                 <Text style={styles.logobtntext}>facebook</Text>
               </TouchableOpacity>
-            </View>
+            </View> */}
             <Text style={styles.text2}>के माध्यम से लॉगिन करें|</Text>
             <TouchableOpacity
               style={styles.bottomButton}
@@ -193,7 +214,13 @@ const Screen4 = ({
                 ))}
               </View>
             </View>
-            <TouchableOpacity style={styles.otptextContainer}>
+            <TouchableOpacity
+              style={styles.otptextContainer}
+              onPress={() => {
+                setotpSection(false);
+                setverified(false);
+              }}
+            >
               <Text style={styles.otptext2}>ओटीपी प्राप्त नहीं हुआ </Text>
               <Text style={[styles.otptext2, { color: "black" }]}>
                 ओटीपी पुनः भेजें
@@ -217,7 +244,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   topNav: {
-    marginTop: 50,
+    // marginTop: 50,
     height: 88,
     backgroundColor: "rgba(102 ,0, 0 , 0.59)",
     alignItems: "center",
@@ -347,19 +374,16 @@ const styles = StyleSheet.create({
   },
   BottomNav: {
     position: "absolute",
-    bottom: -130,
-    left: 0,
+    bottom: 0,
+    height: 58,
+    backgroundColor: "#E2E4F4",
     width: "100%",
-    height: 62,
-    backgroundColor: "rgba(102 ,0, 0 , 0.59)",
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "#FF0000",
-    borderWidth: 1,
   },
   BottomText: {
     fontSize: 20,
-    color: "white",
+    color: "#000004",
     fontWeight: "bold",
   },
 });

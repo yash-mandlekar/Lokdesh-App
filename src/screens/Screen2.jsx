@@ -20,7 +20,6 @@ const Screen2 = ({ refToken }) => {
   });
   return (
     <View style={styles.container}>
-      {/* status bar */}
       <View style={styles.nav}>
         <TouchableOpacity onPress={handleSkipButton} style={styles.skipButton}>
           <Text style={styles.skipText}>SKIP</Text>
@@ -82,16 +81,15 @@ const Screen2 = ({ refToken }) => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     height: "100%",
     backgroundColor: "rgba(102 ,0, 0 , 0.59)",
+    justifyContent: "center",
   },
   nav: {
     height: "5%",
     width: "100%",
-    marginTop: 26,
     paddingRight: 23,
     display: "flex",
     flexDirection: "row",
@@ -116,7 +114,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   mainContent: {
-    height: 512,
+    height: "50%",
     marginTop: 20,
     marginBottom: 57,
     alignItems: "center",

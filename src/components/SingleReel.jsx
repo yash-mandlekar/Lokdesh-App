@@ -18,11 +18,12 @@ const SingleReel = ({
   refToken,
   accessToken,
   getShorts,
+  mute,
+  setMute,
 }) => {
   const videoRef = useRef(null);
   const PlaybuttonRef = useRef(null);
   const [status, setStatus] = useState({});
-  const [mute, setMute] = useState(true);
   const [like, setLike] = useState(item.isLike);
   const [count, setcount] = useState(0);
   const [User, setUser] = useState({});
@@ -92,19 +93,9 @@ const SingleReel = ({
   };
   const handleShare = async () => {
     try {
-      const result = await Share.share({
-        message:
-          "React Native | A framework for building native apps using React",
+      await Share.share({
+        message: "http://lokdeshtv.com/singleVideo/" + item._id,
       });
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
     } catch (error) {
       alert(error.message);
     }
@@ -203,7 +194,7 @@ const SingleReel = ({
         {/* comment */}
         <TouchableOpacity onPress={() => alert("comment")} style={styles.btn}>
           <Ionic name="chatbubble-ellipses-outline" style={styles.btnIcon} />
-          <Text style={styles.btnText}>{item.likes.length}</Text>
+          <Text style={styles.btnText}>{item.comments.length}</Text>
         </TouchableOpacity>
         {/* share button */}
         <TouchableOpacity style={styles.btn} onPress={handleShare}>
@@ -279,7 +270,7 @@ export default SingleReel;
 const styles = StyleSheet.create({
   container: {
     width: windowWidth,
-    height: windowHeight - 30,
+    height: windowHeight,
     position: "relative",
     justifyContent: "center",
     alignItems: "center",

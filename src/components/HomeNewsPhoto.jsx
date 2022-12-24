@@ -15,7 +15,7 @@ const HomeNewsPhoto = ({ item, setSingleNews, index }) => {
   const navigation = useNavigation();
   const shareBtn = () => {
     Share.share({
-      message: "http://localhost:3000/news/" + item._id,
+      message: "http://lokdeshtv.com/news/" + item._id,
     });
   };
   const handleSingleNews = () => {

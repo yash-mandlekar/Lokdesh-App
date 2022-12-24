@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
   },
   EpaperCnt: {
     padding: 6,
-    marginBottom: 60,
     backgroundColor: "#f2f2f2",
   },
   EpaperTitle: {

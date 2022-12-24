@@ -18,7 +18,9 @@ const TopNavBar = () => {
     if (val === "Logout") {
       AsyncStore.removeItem("refreshToken");
       AsyncStore.removeItem("accessToken");
-      navigation.navigate("Screen4");
+      setTimeout(() => {
+        navigation.navigate("Screen4");
+      }, 500);
     } else {
       navigation.navigate(val);
     }
@@ -61,23 +63,23 @@ const TopNavBar = () => {
           }}
         >
           <View style={styles.menuopts}>
-            <MenuOption style={styles.menuopt} value="Profile">
-              <Ionic name="person" size={40} color="black" />
-              <Text style={styles.dropDownText}>Profile</Text>
+            <MenuOption style={[styles.menuopt,{borderColor: "blue"}]} value="Profile">
+              <Ionic name="person" size={40} color="blue" />
+              <Text style={[styles.dropDownText,{color: "blue"}]}>Profile</Text>
             </MenuOption>
-            <MenuOption style={styles.menuopt} value="Epaper">
-              <Ionic name="newspaper" size={40} color="black" />
-              <Text style={styles.dropDownText}>Epaper</Text>
+            <MenuOption style={[styles.menuopt,{borderColor: "grey"}]} value="Epaper">
+              <Ionic name="newspaper" size={40} color="grey" />
+              <Text style={[styles.dropDownText,{color: "grey"}]}>Epaper</Text>
             </MenuOption>
           </View>
           <View style={styles.menuopts}>
-            <MenuOption style={styles.menuopt} value="Videos">
-              <Ionic name="videocam" size={40} color="black" />
-              <Text style={styles.dropDownText}>Videos</Text>
+            <MenuOption style={[styles.menuopt,{borderColor: "red"}]} value="Videos">
+              <Ionic name="videocam" size={40} color="red" />
+              <Text style={[styles.dropDownText,{color: "red"}]}>Videos</Text>
             </MenuOption>
-            <MenuOption style={styles.menuopt} value="Language">
-              <Ionic name="language" size={40} color="black" />
-              <Text style={styles.dropDownText}>Select Language</Text>
+            <MenuOption style={[styles.menuopt,{borderColor: "orange"}]} value="Language">
+              <Ionic name="language" size={40} color="orange" />
+              <Text style={[styles.dropDownText,{color: "orange"}]}>Select Language</Text>
             </MenuOption>
           </View>
 
@@ -96,13 +98,11 @@ const TopNavBar = () => {
 
 const styles = StyleSheet.create({
   menuContainer: {
-    marginTop: 35,
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
-    // backgroundColor: "rgba(102 ,0, 0 , 0.59)",
   },
   logoStytle: {
     width: 100,
@@ -121,7 +121,6 @@ const styles = StyleSheet.create({
   },
   menuOptionsStyle: {
     backgroundColor: "#dadada",
-    // marginLeft: -20,
     width: "100%",
     height: "45%",
     borderRadius: 15,
@@ -130,7 +129,6 @@ const styles = StyleSheet.create({
   menuopts: {
     flexDirection: "row",
     justifyContent: "space-between",
-    // alignItems: "center",
     width: "100%",
     height: "40%",
     marginVertical: 4,
@@ -138,7 +136,6 @@ const styles = StyleSheet.create({
   menuopt: {
     width: "49%",
     backgroundColor: "white",
-    // flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 8,

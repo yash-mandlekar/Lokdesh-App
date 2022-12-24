@@ -11,7 +11,6 @@ import Ionic from "react-native-vector-icons/Ionicons";
 import TopNavBar from "../components/TopNavBar";
 import BottomNavBar from "../components/BottomNavBar";
 import { useNavigation } from "@react-navigation/native";
-import { WebView } from "react-native-webview";
 import * as Speech from "expo-speech";
 const SingleNews = ({ singleNews }) => {
   const navigation = useNavigation();
@@ -20,7 +19,8 @@ const SingleNews = ({ singleNews }) => {
   const speak = async (e) => {
     setSpeech(true);
     // normal rate is 0.8
-    Speech.speak(e, { rate: 0.8 });
+    // indian voice
+    Speech.speak(e, { rate: 0.8, language: "hi-IN" });
   };
   const stopSpeak = async (e) => {
     setSpeech(false);
@@ -94,14 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.1)",
     borderRadius: 5,
     marginHorizontal: 5,
-    marginBottom: 70,
   },
-  // singleNewsContainer: {
-  //   backgroundColor: "white",
-  //   borderRadius: 5,
-  //   marginHorizontal: 5,
-  //   marginBottom: 70,
-  // },
   singleNewsBack: {
     width: "100%",
     flexDirection: "row",

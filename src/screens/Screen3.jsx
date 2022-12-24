@@ -20,7 +20,7 @@ const Screen3 = ({ refToken }) => {
   const [slide, setslide] = useState(1);
   const [load, setLoad] = useState(true);
   const [inp, setInp] = useState("");
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(1);
   const [Languages, setLanguages] = useState([
     { lang1: "हिन्दी", lang2: "HINDI", code: "hi" },
     { lang1: "ENGLISH", code: "en" },
@@ -69,15 +69,31 @@ const Screen3 = ({ refToken }) => {
     cpy[i].selected = !options[i].selected;
     setOptions(cpy);
   };
-  const getOptions = async () => {
+  const getOptions = async (lang) => {
     setLoad(true);
     const res = await Axios.get("/news-category");
-    setOptions(res.data);
+    if (lang) {
+      var cpy = [];
+      for (var i = 0; i < res.data.length; i++) {
+        const res2 = await Axios.post("/user/translate", {
+          text: res.data[i].hindiName,
+          target: lang.code,
+        });
+        cpy.push({
+          ...res.data[i],
+          hindiName: res2.data.translation,
+        });
+      }
+      setOptions(cpy);
+    } else {
+      setOptions(res.data);
+    }
     setLoad(false);
   };
   const handleLanguage = async (lang, i) => {
     await AsyncStore.setItem("language", JSON.stringify(lang));
     setSelected(i);
+    getOptions(lang);
   };
   useEffect(() => {
     getOptions();
@@ -89,15 +105,23 @@ const Screen3 = ({ refToken }) => {
   });
   return (
     <View style={styles.container}>
-      <View style={styles.topNav}>
+      <TouchableOpacity
+        onPress={() => setslide(slide - 1)}
+        style={styles.topNav}
+      >
         <Text style={[styles.topText, slide > 1 && { fontSize: 20 }]}>
           {slide === 1 ? "भाषा का चयन करें" : "अपना पसंदीदा विषय चुनें"}
         </Text>
-      </View>
-      <View style={styles.mainContainer}>
+      </TouchableOpacity>
+      <View
+        style={[
+          styles.mainContainer,
+          { minHeight: slide > 2 ? "100%" : "70%" },
+        ]}
+      >
         {slide == 3 && (
           <LinearGradient
-            colors={["black", "white"]}
+            colors={["grey", "white"]}
             style={styles.gradientBox}
           />
         )}
@@ -178,7 +202,7 @@ const Screen3 = ({ refToken }) => {
         )}
         {slide === 3 && (
           <View style={styles.boxContainer}>
-            <Text style={styles.slide3Text}>
+            <Text style={[styles.slide3Text, { marginTop: "50%" }]}>
               अपने स्थानीय क्षेत्र की खबर देखना चाहते है? हमें आपकी लोकेशन पता
               करने दे|
             </Text>
@@ -194,7 +218,7 @@ const Screen3 = ({ refToken }) => {
           </View>
         )}
         {slide === 4 && (
-          <View style={styles.boxContainer}>
+          <View style={[styles.boxContainer, { paddingTop: "10%" }]}>
             <TextInput
               style={styles.input}
               onChangeText={(e) => {
@@ -275,23 +299,21 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     backgroundColor: "#fff",
+    justifyContent: "space-between",
   },
   topNav: {
     height: 88,
     backgroundColor: "rgba(102 ,0, 0 , 0.59)",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
   },
   BottomNav: {
     width: "100%",
     height: 62,
-    marginTop: 40,
+    marginTop: -25,
     backgroundColor: "rgba(102 ,0, 0 , 0.59)",
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "#FF0000",
-    borderWidth: 1,
   },
   BottomText: {
     fontSize: 20,
@@ -304,19 +326,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   mainContainer: {
-    marginTop: 3,
-    minHeight: 526,
-    borderTopColor: "#A70000",
-    borderBottomColor: "white",
-    borderRightColor: "white",
-    borderLeftColor: "white",
-    borderWidth: 1,
     backgroundColor: "white",
-    paddingTop: 50,
     paddingHorizontal: 20,
   },
   boxContainer: {
-    height: 510,
+    height: "50%",
     flexDirection: "row",
     flex: 1,
     flexWrap: "wrap",
@@ -372,16 +386,15 @@ const styles = StyleSheet.create({
   },
   gradientBox: {
     position: "absolute",
-    height: 375,
+    height: "90%",
+    top: 0,
     width: 416,
     zIndex: -1,
   },
   slide3Text: {
     width: 300,
-    height: 64,
     fontSize: 22,
     color: "black",
-    marginTop: 245,
     textAlign: "center",
   },
   btn1: {
@@ -435,7 +448,7 @@ const styles = StyleSheet.create({
   },
   cities: {
     width: "100%",
-    height: 436,
+    height: 300,
     marginTop: 25,
     padding: 2,
   },
