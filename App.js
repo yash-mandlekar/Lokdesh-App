@@ -16,13 +16,25 @@ import Profile from "./src/screens/Profile";
 import SingleNews from "./src/screens/SingleNews";
 import SingleEPaper from "./src/screens/SingleEpaper";
 import Language from "./src/screens/Language";
+import EditProfile from "./src/screens/EditProfile";
+import Feed from "./src/screens/Feed";
+import Singlepost from "./src/screens/Singlepost";
+import SingleUser from "./src/screens/SingleUser";
+import Addpost from "./src/screens/Addpost";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   const [refToken, setRefToken] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [singleNews, setSingleNews] = useState({});
-
+  const [User, setUser] = useState({
+    name: "",
+    email: "",
+    profileImage: "/images/avtar.jpg",
+    posts: [],
+    followers: [],
+    following: [],
+  });
   const [userValidation, setuserValidation] = useState({
     phone: "",
   });
@@ -143,7 +155,30 @@ export default function App() {
                   headerShown: false,
                 }}
               >
-                {(props) => <Profile refToken={refToken} />}
+                {(props) => (
+                  <Profile
+                    User={User}
+                    setUser={setUser}
+                    refToken={refToken}
+                    accessToken={accessToken}
+                  />
+                )}
+              </Stack.Screen>
+              {/* EditProfile Screen */}
+              <Stack.Screen
+                name="EditProfile"
+                options={{
+                  headerShown: false,
+                }}
+              >
+                {(props) => (
+                  <EditProfile
+                    User={User}
+                    setUser={setUser}
+                    refToken={refToken}
+                    accessToken={accessToken}
+                  />
+                )}
               </Stack.Screen>
               {/* Language Screen */}
               <Stack.Screen
@@ -153,6 +188,70 @@ export default function App() {
                 }}
               >
                 {(props) => <Language />}
+              </Stack.Screen>
+              {/* Feed Screen */}
+              <Stack.Screen
+                name="Feed"
+                options={{
+                  headerShown: false,
+                }}
+              >
+                {(props) => (
+                  <Feed
+                    User={User}
+                    setUser={setUser}
+                    accessToken={accessToken}
+                    refToken={refToken}
+                  />
+                )}
+              </Stack.Screen>
+              {/* Single Post Screen */}
+              <Stack.Screen
+                name="Singlepost"
+                options={{
+                  headerShown: false,
+                }}
+              >
+                {(props) => (
+                  <Singlepost
+                    User={User}
+                    setUser={setUser}
+                    accessToken={accessToken}
+                    refToken={refToken}
+                  />
+                )}
+              </Stack.Screen>
+              {/* Single User Screen */}
+              <Stack.Screen
+                name="SingleUser"
+                options={{
+                  headerShown: false,
+                }}
+              >
+                {(props) => (
+                  <SingleUser
+                    User={User}
+                    setUser={setUser}
+                    accessToken={accessToken}
+                    refToken={refToken}
+                  />
+                )}
+              </Stack.Screen>
+              {/* Single User Screen */}
+              <Stack.Screen
+                name="Addpost"
+                options={{
+                  headerShown: false,
+                }}
+              >
+                {(props) => (
+                  <Addpost
+                    User={User}
+                    setUser={setUser}
+                    accessToken={accessToken}
+                    refToken={refToken}
+                  />
+                )}
               </Stack.Screen>
             </>
           )}

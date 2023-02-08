@@ -24,7 +24,8 @@ const SingleReel = ({
   const videoRef = useRef(null);
   const PlaybuttonRef = useRef(null);
   const [status, setStatus] = useState({});
-  const [like, setLike] = useState(item.isLike);
+  const [Likes, setLikes] = useState(item.likes);
+  const [Like, setLike] = useState();
   const [count, setcount] = useState(0);
   const [User, setUser] = useState({});
 
@@ -54,6 +55,7 @@ const SingleReel = ({
         token: refToken,
       });
       setUser(res.data.user);
+      setLike(Likes?.includes(res.data.user?._id));
     } catch (err) {
       console.log(err);
     }
@@ -107,10 +109,9 @@ const SingleReel = ({
           token: accessToken,
         },
       };
-      const res = await Axios.post(`/user/shorts/like/${item._id}`, {}, config);
-      // item.likes = res.data.likes;
-      getShorts();
-      setLike(!like);
+      const res = await Axios.get(`/user/shorts/like/${item._id}`, config);
+      setLikes(res.data.short.likes);
+      setLike(!Like);
     } catch (err) {
       console.log(err);
     }
@@ -184,12 +185,9 @@ const SingleReel = ({
           <Ionic
             name="heart"
             // style={[styles.btnIcon, { color: like ? "red" : "white" }]}
-            style={[
-              styles.btnIcon,
-              { color: item.likes.includes(User._id) ? "red" : "white" },
-            ]}
+            style={[styles.btnIcon, { color: Like ? "red" : "white" }]}
           />
-          <Text style={styles.btnText}>{item.likes.length}</Text>
+          <Text style={styles.btnText}>{Likes.length}</Text>
         </TouchableOpacity>
         {/* comment */}
         <TouchableOpacity onPress={() => alert("comment")} style={styles.btn}>

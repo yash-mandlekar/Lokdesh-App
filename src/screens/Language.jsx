@@ -56,7 +56,7 @@ const Language = () => {
               style={[
                 styles.box,
                 index === selected && {
-                  backgroundColor: "rgba(102 ,0, 0 , 0.59)",
+                  backgroundColor: "rgb(152 ,0, 0)",
                 },
               ]}
             >

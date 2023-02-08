@@ -9,8 +9,8 @@ const Videos = ({ refToken, accessToken }) => {
   const [videoData, setVideoData] = useState([]);
   const [load, setLoad] = useState(true);
   const [mute, setMute] = useState(true);
-
   const [currentIndex, setCurrentIndex] = useState(0);
+
   const handleChangeIndexValue = ({ index }) => {
     setCurrentIndex(index);
   };
@@ -48,7 +48,6 @@ const Videos = ({ refToken, accessToken }) => {
         <View
           style={{
             height: Dimensions.get("window").height,
-            // marginBottom: 50,
           }}
         >
           <SwiperFlatList

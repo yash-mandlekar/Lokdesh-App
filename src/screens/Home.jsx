@@ -229,6 +229,7 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "#fff",
     justifyContent: "space-between",
+    paddingTop: 20,
   },
   headerLogo: {
     width: "81vw",
@@ -276,7 +277,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
   },
-  newsFilterText: {     
+  newsFilterText: {
     fontSize: 14,
     color: "black",
     fontWeight: "bold",

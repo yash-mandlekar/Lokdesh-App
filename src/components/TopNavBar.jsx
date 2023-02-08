@@ -10,6 +10,7 @@ import {
 } from "react-native-popup-menu";
 import AsyncStore from "@react-native-async-storage/async-storage";
 import Ionic from "react-native-vector-icons/Ionicons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const TopNavBar = () => {
   const navigation = useNavigation();
@@ -63,23 +64,41 @@ const TopNavBar = () => {
           }}
         >
           <View style={styles.menuopts}>
-            <MenuOption style={[styles.menuopt,{borderColor: "blue"}]} value="Profile">
+            <MenuOption
+              style={[styles.menuopt, { borderColor: "blue" }]}
+              value="Profile"
+            >
               <Ionic name="person" size={40} color="blue" />
-              <Text style={[styles.dropDownText,{color: "blue"}]}>Profile</Text>
+              <Text style={[styles.dropDownText, { color: "blue" }]}>
+                Profile
+              </Text>
             </MenuOption>
-            <MenuOption style={[styles.menuopt,{borderColor: "grey"}]} value="Epaper">
+            <MenuOption
+              style={[styles.menuopt, { borderColor: "grey" }]}
+              value="Epaper"
+            >
               <Ionic name="newspaper" size={40} color="grey" />
-              <Text style={[styles.dropDownText,{color: "grey"}]}>Epaper</Text>
+              <Text style={[styles.dropDownText, { color: "grey" }]}>
+                Epaper
+              </Text>
             </MenuOption>
           </View>
           <View style={styles.menuopts}>
-            <MenuOption style={[styles.menuopt,{borderColor: "red"}]} value="Videos">
-              <Ionic name="videocam" size={40} color="red" />
-              <Text style={[styles.dropDownText,{color: "red"}]}>Videos</Text>
+            <MenuOption
+              style={[styles.menuopt, { borderColor: "red" }]}
+              value="Feed"
+            >
+              <MaterialCommunityIcons name="post" size={40} color="red" />
+              <Text style={[styles.dropDownText, { color: "red" }]}>Feed</Text>
             </MenuOption>
-            <MenuOption style={[styles.menuopt,{borderColor: "orange"}]} value="Language">
+            <MenuOption
+              style={[styles.menuopt, { borderColor: "orange" }]}
+              value="Language"
+            >
               <Ionic name="language" size={40} color="orange" />
-              <Text style={[styles.dropDownText,{color: "orange"}]}>Select Language</Text>
+              <Text style={[styles.dropDownText, { color: "orange" }]}>
+                Select Language
+              </Text>
             </MenuOption>
           </View>
 

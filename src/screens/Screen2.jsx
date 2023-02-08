@@ -84,7 +84,8 @@ const Screen2 = ({ refToken }) => {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    backgroundColor: "rgba(102 ,0, 0 , 0.59)",
+    // backgroundColor: "rgb(152 ,0, 0)",
+    backgroundColor: "rgb(152 ,0, 0)",
     justifyContent: "center",
   },
   nav: {
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     marginBottom: 57,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(102 ,0, 0 , 0.39)",
+    backgroundColor: "rgb(152 ,0, 0)",
   },
   mainText: {
     flexDirection: "row",

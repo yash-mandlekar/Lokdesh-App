@@ -134,7 +134,7 @@ const Screen3 = ({ refToken }) => {
                 style={[
                   styles.box,
                   index === selected && {
-                    backgroundColor: "rgba(102 ,0, 0 , 0.59)",
+                    backgroundColor: "rgb(152 ,0, 0)",
                   },
                 ]}
               >
@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
   },
   topNav: {
     height: 88,
-    backgroundColor: "rgba(102 ,0, 0 , 0.59)",
+    backgroundColor: "rgb(152 ,0, 0)",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 62,
     marginTop: -25,
-    backgroundColor: "rgba(102 ,0, 0 , 0.59)",
+    backgroundColor: "rgb(152 ,0, 0)",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -401,7 +401,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 48,
     marginTop: 20,
-    backgroundColor: "rgba(102 ,0, 0 , 0.59)",
+    backgroundColor: "rgb(152 ,0, 0)",
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",

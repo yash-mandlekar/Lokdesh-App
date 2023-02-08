@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     borderRadius: 5,
     borderColor: "rgba(0,0,0,0.1)",
-    borderBottomColor: "rgba(102 ,0, 0 , 0.59)",
+    borderBottomColor: "rgb(152 ,0, 0)",
     borderBottomWidth: 2,
   },
   contentContainer: {

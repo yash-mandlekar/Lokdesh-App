@@ -51,7 +51,7 @@ const Screen4 = ({
     otpRef.current.focus();
   };
   const handleLogin = async () => {
-    if (otpVal.length < 6) {
+    if (otpVal.length < 4) {
       alert("Please enter valid OTP");
       return;
     }
@@ -143,34 +143,7 @@ const Screen4 = ({
                 <Text style={styles.btn1text}>ओटीपी प्राप्त करें</Text>
               </TouchableOpacity>
             )}
-            {/* <View style={styles.logoContainer}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("Screen4")}
-                style={styles.logobtn}
-              >
-                <Image
-                  resizeMode="contain"
-                  style={styles.googleLogo}
-                  source={require("../../assets/images/Google.png")}
-                />
-                <Image
-                  resizeMode="contain"
-                  source={require("../../assets/images/GoogleText.png")}
-                  style={styles.logobtntext}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("Screen4")}
-                style={styles.logobtn}
-              >
-                <Image
-                  resizeMode="contain"
-                  style={[styles.googleLogo, { width: 56 }]}
-                  source={require("../../assets/images/Facebook.jpg")}
-                />
-                <Text style={styles.logobtntext}>facebook</Text>
-              </TouchableOpacity>
-            </View> */}
+
             <Text style={styles.text2}>के माध्यम से लॉगिन करें|</Text>
             <TouchableOpacity
               style={styles.bottomButton}
@@ -186,7 +159,7 @@ const Screen4 = ({
         ) : (
           <View>
             <Text style={styles.otptext}>
-              हमने आपके द्वारा दर्ज किए गए नंबर पर 6 अंकों का ओटीपी भेजा है|
+              हमने आपके द्वारा दर्ज किए गए नंबर पर 4 अंकों का ओटीपी भेजा है|
             </Text>
             <View style={styles.otpContainer}>
               <TextInput
@@ -195,10 +168,10 @@ const Screen4 = ({
                   if (isNaN(value)) {
                     return;
                   }
-                  if (value.length > 6) {
+                  if (value.length > 4) {
                     return;
                   }
-                  let val = value + "------".substr(0, 6 - value.length);
+                  let val = value + "------".substr(0, 4 - value.length);
                   let a = [...val];
                   setOtpVal(a);
                   setOtp(value);
@@ -207,7 +180,7 @@ const Screen4 = ({
                 keyboardType="numeric"
               />
               <View style={styles.otpBoxesContainer}>
-                {[0, 1, 2, 3, 4, 5].map((item, index) => (
+                {[0, 1, 2, 3].map((item, index) => (
                   <Text onPress={handleotp} style={styles.otpBox} key={index}>
                     {otp[item]}
                   </Text>
@@ -246,7 +219,7 @@ const styles = StyleSheet.create({
   topNav: {
     // marginTop: 50,
     height: 88,
-    backgroundColor: "rgba(102 ,0, 0 , 0.59)",
+    backgroundColor: "rgb(152 ,0, 0)",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -286,7 +259,7 @@ const styles = StyleSheet.create({
   btn1: {
     width: "90%",
     height: 48,
-    backgroundColor: "rgba(102 ,0, 0 , 0.59)",
+    backgroundColor: "rgb(152 ,0, 0)",
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",

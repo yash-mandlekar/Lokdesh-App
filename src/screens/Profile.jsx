@@ -6,38 +6,49 @@ import {
   TouchableOpacity,
   ScrollView,
   ImageBackground,
+  FlatList,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import TopNavBar from "../components/TopNavBar";
 import BottomNavBar from "../components/BottomNavBar";
 import Axios from "../components/Axios";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-const Profile = ({ refToken }) => {
+const Profile = ({ refToken, accessToken, User, setUser }) => {
   var groundcolor = "black";
+  const params = useRoute();
+  const navigation = useNavigation();
   const [load, setload] = useState(false);
-  const [User, setUser] = useState({
-    name: "",
-    email: "",
-    profileImage: "/images/avtar.jpg",
-    posts: [],
-    followers: [],
-    following: [],
-  });
+  const [posts, setposts] = useState([]); 
+  const handleNavigation = (val) => {
+    navigation.navigate(val);
+  };
   const getUser = async () => {
     setload(true);
+    const config = {
+      headers: {
+        token: accessToken,
+      },
+    };
     try {
       const res = await Axios.post("/user/refreshtoken", {
         token: refToken,
       });
       setload(false);
       setUser(res.data.user);
+      const { data } = await Axios.get("/user/post", config);
+      setposts(data.user.posts);
     } catch (err) {
       console.log(err);
     }
   };
+  const handleSinglePost = (val) => {
+    // setSinglepost(val);
+    navigation.navigate("Singlepost", { id: val });
+  };
   useEffect(() => {
     getUser();
-  }, []);
+  }, [params]);
   return (
     <View style={styles.container}>
       <TopNavBar />
@@ -122,9 +133,15 @@ const Profile = ({ refToken }) => {
                 </View>
                 <View style={{ marginRight: 20, flex: 2 }}>
                   <Image
-                    source={{
-                      uri: "http://52.66.186.55/" + User.profileImage,
-                    }}
+                    source={
+                      User?.profileImage?.includes("/avtar")
+                        ? {
+                            uri: User?.profileImage,
+                          }
+                        : {
+                            uri: `data:image/png;base64,${User?.profileImage}`,
+                          }
+                    }
                     style={{
                       height: 90,
                       width: 90,
@@ -147,7 +164,7 @@ const Profile = ({ refToken }) => {
                 >
                   {User.name}
                 </Text>
-                <Text style={{ color: groundcolor }}>{User.refreshToken}</Text>
+                <Text style={{ color: groundcolor }}>{User.bio}</Text>
               </View>
             </View>
             {/* ----------------------------------EDIT PROFILE----------------------------- */}
@@ -162,6 +179,7 @@ const Profile = ({ refToken }) => {
                   marginTop: 20,
                   paddingVertical: 5,
                 }}
+                onPress={() => handleNavigation("EditProfile")}
               >
                 <Text
                   style={{
@@ -174,6 +192,34 @@ const Profile = ({ refToken }) => {
                   Edit Profile
                 </Text>
               </TouchableOpacity>
+            </View>
+            {/* ----------------------------------GRID VIEW----------------------------- */}
+            <TouchableOpacity
+              style={styles.plus}
+              onPress={() => navigation.navigate("Addpost")}
+            >
+              <Text>+ Add Post</Text>
+            </TouchableOpacity>
+            <View style={{ marginTop: 20, paddingLeft: 3 }}>
+              <FlatList
+                numColumns={3}
+                data={posts.reverse()}
+                renderItem={({ item }) => (
+                  <TouchableOpacity onPress={() => handleSinglePost(item._id)}>
+                    <Image
+                      source={{
+                        uri: `data:image/png;base64,${item.file}`,
+                      }}
+                      style={{
+                        width: 116,
+                        height: 116,
+                        margin: 1,
+                        borderColor: "lightgrey",
+                      }}
+                    />
+                  </TouchableOpacity>
+                )}
+              />
             </View>
           </View>
         </View>
@@ -191,6 +237,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     // alignItems: 'center',
     justifyContent: "flex-start",
+    paddingTop: 20,
   },
   web: {
     flex: 0.912,
@@ -202,5 +249,16 @@ const styles = StyleSheet.create({
   },
   androidHeader: {
     backgroundColor: "white",
+    flex: 1,
+  },
+  plus: {
+    height: 30,
+    width: 100,
+    borderRadius: 15,
+    backgroundColor: "#e7f1ff",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+    marginLeft: 10,
   },
 });
